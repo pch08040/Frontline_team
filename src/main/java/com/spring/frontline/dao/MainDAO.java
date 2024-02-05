@@ -1,0 +1,65 @@
+package com.spring.frontline.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.spring.frontline.dto.BoardDTO;
+import com.spring.frontline.dto.CommentDTO;
+import com.spring.frontline.dto.UserDTO;
+
+public interface MainDAO {
+	List selectUserList();
+	UserDTO selectUser(UserDTO userDTO);
+	void insertUser(UserDTO userDTO);
+	UserDTO loginUser(Map map);
+	void updateUser(UserDTO userDTO);
+	void deleteUser(List list);
+	int selectUserTotal(Map map);
+	List selectUserPage(Map map);
+	void insertDummy(UserDTO userDTO);
+	UserDTO findId(UserDTO userDTO);
+	UserDTO findPw(UserDTO userDTO);
+	boolean checkId(Map map);
+	boolean checkEmail(Map map);
+	boolean checkPhone(Map map);
+	List selectBoardList(Map map);
+	List selectBoardPage(Map map);
+	int selectBoardTotal(Map map);
+	List selectRegionNames();
+	BoardDTO selectBoard(BoardDTO boardDTO);
+	void addComment(CommentDTO commentDTO);
+	List selectCommentList(BoardDTO boardDTO);
+	List selectCommentPage(Map map);
+	int selectCommentTotal(Map map);
+	CommentDTO selectComment(CommentDTO commentDTO);
+	void updateComment(CommentDTO commentDTO);
+	void deleteComment(List list);
+	void insertBoard(BoardDTO boardDTO);
+	List selectAdminBoardPage(Map map);
+	int selectAdminBoardTotal(Map map);
+	int selectAdminBoardSearchTotal(Map map);
+	void deleteBoard(List list);
+	BoardDTO getAdminBoard(BoardDTO boardDTO);
+	void updateBoard(BoardDTO boardDTO);
+	List selectAdminBoardSearchPage(Map map);
+	List getBoardInfoList();
+	void deleteBoardDTO(List list);
+	BoardDTO detailBoardDTO(BoardDTO dto);
+	void updateBoardDTO(BoardDTO dto);
+	void travelNew(BoardDTO dto);
+	List travelList();
+	BoardDTO travelUpdate(BoardDTO dto);
+	void setBoard(BoardDTO dto);
+	void travelDelete(String[] boardDelete);
+	List boardPick1(BoardDTO dto);
+	List boardPick2(BoardDTO dto);
+	List boardPick3(BoardDTO dto);
+	List boardPick4(BoardDTO dto);
+	public List pageBoard(BoardDTO boardDTO);
+	public int pageTotal();
+	public BoardDTO updatePage(BoardDTO boardDTO);
+	public int deleteBoard(String delete);
+	List popup1();
+	Map popupReadyUpdate(Map map);
+	void popupUpdate(Map map);
+}

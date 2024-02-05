@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<resultMap id="commentMap" type="com.spring.frontline.dto.CommentDTO">
+	  <result column="comment_seq" property="commentSeq"/>
+	  <result column="board_seq" property="boardSeq"/>
+	  <result column="user_seq" property="userSeq"/>
+	  <result column="parent_seq" property="parentSeq"/>
+	  <result column="user_id" property="userId"/>
+	  <result column="grade_seq" property="gradeSeq"/>
+	  <result column="comment_text" property="commentText"/>
+	  <result column="comment_regdate" property="commentRegDate"/>
+	  <result column="lv" property="depth"/>
+	</resultMap>
+	
+	<insert id="insertComment" parameterType="com.spring.frontline.dto.CommentDTO">
+		insert into comment_info values ( comment_seq.nextval, #{boardSeq}, #{userSeq}, #{parentSeq}, #{userId}, #{gradeSeq}, #{commentText}, TO_CHAR(SYSDATE + (interval '9' hour),'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select id="selectCommentList" parameterType="com.spring.frontline.dto.BoardDTO" resultMap="commentMap"> 
+		with comment_recu (lv, comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq) as (
+		    select
+		        0 as lv,
+		        comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq
+		    from comment_info
+		    where parent_seq is null and board_seq = #{boardSeq}
+		    
+		    union all
+		    
+		    select
+		        cr.lv + 1 as lv,
+		        c.comment_seq, c.board_seq, c.parent_seq, c.user_seq, c.comment_regdate, lpad('ㄴ', (cr.lv+1)*10, ' ') || c.comment_text, c.user_id, c.grade_seq
+		    from 
+		        comment_recu cr
+		        left outer join comment_info c on c.parent_seq = cr.comment_seq
+		    where c.parent_seq is not null
+		)
+		search depth first by comment_seq set order_depth
+		select * from comment_recu
+		order by order_depth
+	</select>
+	
+	<select id="commentPage" parameterType="java.util.HashMap" resultMap="commentMap">
+		<choose>
+			<when test="searchColumn == 'userId' and searchText != ''">
+			select * from (select rownum r, c.* from (with emp_recu (lv, comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq) as (
+				    select
+				        0 as lv,
+				        comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq
+				    from comment_info
+				    where parent_seq is null 
+				    
+				    union all
+				    
+				    select
+				        er.lv + 1 as lv,
+				        e.comment_seq, e.board_seq, e.parent_seq, e.user_seq, e.comment_regdate, lpad('ㄴ', (er.lv+1)*10, ' ') || e.comment_text, e.user_id, c.grade_seq
+				    from 
+				        emp_recu er
+				        left outer join comment_info e on e.parent_seq = er.comment_seq
+				    where e.parent_seq is not null
+				)
+				search depth first by comment_seq set order_depth
+				select * from emp_recu
+				order by order_depth) c where user_id = #{searchText} order by comment_seq) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum}
+			</when>
+			<when test="searchColumn == 'commentText' and searchText != ''">
+			select * from (select rownum r, c.* from (with emp_recu (lv, comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq) as (
+				    select
+				        0 as lv,
+				        comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq
+				    from comment_info
+				    where parent_seq is null 
+				    
+				    union all
+				    
+				    select
+				        er.lv + 1 as lv,
+				        e.comment_seq, e.board_seq, e.parent_seq, e.user_seq, e.comment_regdate, lpad('ㄴ', (er.lv+1)*10, ' ') || e.comment_text, e.user_id, e.grade_seq
+				    from 
+				        emp_recu er
+				        left outer join comment_info e on e.parent_seq = er.comment_seq
+				    where e.parent_seq is not null
+				)
+				search depth first by comment_seq set order_depth
+				select * from emp_recu
+				order by order_depth) c where comment_text like '%' || #{searchText} || '%' order by comment_seq) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum}
+			</when>
+			<otherwise>
+				with emp_recu (lv, comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq) as (
+				    select
+				        0 as lv,
+				        comment_seq, board_seq, parent_seq, user_seq, comment_regdate, comment_text, user_id, grade_seq
+				    from comment_info
+				    where parent_seq is null
+				    
+				    union all
+				    
+				    select
+				        er.lv + 1 as lv,
+				        e.comment_seq, e.board_seq, e.parent_seq, e.user_seq, e.comment_regdate, lpad('ㄴ', (er.lv+1)*10, ' ') || e.comment_text, e.user_id, e.grade_seq
+				    from 
+				        emp_recu er
+				        left outer join comment_info e on e.parent_seq = er.comment_seq
+				    where e.parent_seq is not null
+				)
+				search depth first by comment_seq set order_depth
+				select * from emp_recu
+				where order_depth <![CDATA[>=]]> #{startNum} and order_depth <![CDATA[<=]]> #{endNum}
+				order by order_depth
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="commentTotal" parameterType="java.util.HashMap" resultType="int">
+		<choose>
+			<when test="searchColumn == 'userId' and searchText != ''">
+				select count(comment_seq) from comment_info where user_id = #{searchText}
+			</when>
+			<when test="searchColumn == 'commentText' and searchText != ''">
+				select count(comment_seq) from comment_info where comment_text like '%' || #{searchText} || '%'
+			</when>
+			<otherwise>
+				select count(comment_seq) from comment_info
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectComment" parameterType="com.spring.frontline.dto.CommentDTO" resultMap="commentMap">
+		select * from comment_info where comment_seq = #{commentSeq}
+	</select>
+	
+	<update id="updateComment" parameterType="com.spring.frontline.dto.CommentDTO">
+		update comment_info set comment_text = #{commentText} where comment_seq = #{commentSeq}
+	</update>
+	
+	<delete id="deleteComment" parameterType="java.util.List">
+		delete from comment_info where comment_seq in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

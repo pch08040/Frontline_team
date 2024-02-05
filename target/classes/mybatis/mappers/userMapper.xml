@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<resultMap id="userMap" type="com.spring.frontline.dto.UserDTO">
+	  <result column="user_seq" property="userSeq"/>
+	  <result column="user_id" property="userId"/>
+	  <result column="user_pw" property="userPw"/>
+	  <result column="user_name" property="userName"/>
+	  <result column="grade_seq" property="gradeSeq"/>
+	  <result column="gender_seq" property="genderSeq"/>
+	  <result column="user_birth" property="userBirth"/>
+	  <result column="user_email" property="userEmail"/>
+	  <result column="user_phone" property="userPhone"/>
+	  <result column="user_regdate" property="userRegDate"/>
+	</resultMap>
+	
+	<select id="selectUserList" resultMap="userMap">
+		select * from user_info order by user_seq
+	</select>
+	
+	<select id="selectUser" parameterType="com.spring.frontline.dto.UserDTO" resultMap="userMap">
+		select * from user_info where user_seq = #{userSeq}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.spring.frontline.dto.UserDTO">
+		insert into user_info values ( user_seq.nextval, #{userId}, #{userPw}, #{userName}, 0, #{genderSeq}, #{userBirth}, #{userEmail}, #{userPhone}, TO_CHAR(SYSDATE + (interval '9' hour),'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select id="loginUser" parameterType="java.util.HashMap" resultMap="userMap">
+		select * from user_info where user_id = #{id} and user_pw = #{pw}
+	</select>
+	
+	<update id="updateUser" parameterType="com.spring.frontline.dto.UserDTO">
+		update user_info set user_id = #{userId}, user_name = #{userName}, user_pw = #{userPw},
+		  	   user_email = #{userEmail}, user_phone = #{userPhone}, grade_seq = #{gradeSeq},
+		       gender_seq = #{genderSeq}, user_birth = #{userBirth} where user_seq = #{userSeq}
+	</update>
+	
+	<delete id="deleteUser" parameterType="java.util.List">
+		delete from user_info where user_seq in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="userTotal" parameterType="java.util.HashMap" resultType="int">
+		<choose>
+			<when test="searchColumn == 'userId' and searchText != ''">
+				select count(user_seq) from user_info where user_id = #{searchText}
+			</when>
+			<when test="searchColumn == 'userName' and searchText != ''">
+				select count(user_seq) from user_info where user_name = #{searchText}
+			</when>
+			<otherwise>
+				select count(user_seq) from user_info
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="userPage" parameterType="java.util.HashMap" resultMap="userMap">
+		<choose>
+			<when test="searchColumn == 'userId' and searchText != ''">
+				select * from (select rownum r, u.* from (select * from user_info where user_Id = #{ searchText} order by user_seq) u) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+			</when>
+    		<when test=" searchColumn == 'userName' and  searchText != ''">
+				select * from (select rownum r, u.* from (select * from user_info where user_name = #{ searchText} order by user_seq) u) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+			</when>
+			<otherwise>
+			 select * from (select rownum r, u.* from (select * from user_info order by user_seq) u) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+			 </otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insertDummy" parameterType="com.spring.frontline.dto.UserDTO">
+		insert into user_info (USER_SEQ, USER_ID, USER_PW, USER_NAME, GRADE_SEQ, GENDER_SEQ, USER_BIRTH, USER_EMAIL, USER_PHONE, USER_REGDATE) values (user_seq.nextval, #{userId}, #{userPw}, #{userName}, 0, #{genderSeq}, #{userBirth}, #{userEmail}, #{userPhone}, TO_CHAR(SYSDATE + (interval '9' hour),'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select id="findId" parameterType="com.spring.frontline.dto.UserDTO" resultMap="userMap">
+		select * from user_info where user_name = #{userName} and user_phone = #{userPhone}
+	</select>
+	
+	<select id="findPw" parameterType="com.spring.frontline.dto.UserDTO" resultMap="userMap">
+		select * from user_info where user_id = #{userId}
+	</select>
+	
+	<select id="checkId" parameterType="java.util.HashMap" resultMap="userMap">
+		select * from user_info where user_id = #{joinDTO.userId}
+	</select>
+	
+	<select id="checkEmail" parameterType="java.util.HashMap" resultMap="userMap">
+		select * from user_info where user_email = #{joinDTO.userEmail}
+	</select>
+	
+	<select id="checkPhone" parameterType="java.util.HashMap" resultMap="userMap">
+		select * from user_info where user_phone = #{joinDTO.userPhone}
+	</select>
+	
+	<select id="popup1" resultType="hashmap">
+		select * from popup
+	</select>
+	
+	<select id="popupReadyUpdate" resultType="hashmap" parameterType="hashmap">
+		select * from popup where popup_number = #{POPUP_NUMBER}  
+	</select>
+	
+	<update id="popupUpdate" parameterType="hashmap">
+		update 
+			popup
+		set
+			popup_image = #{POPUP_IMAGE} 
+		where
+			popup_number = #{POPUP_NUMBER}
+	</update>
+</mapper>

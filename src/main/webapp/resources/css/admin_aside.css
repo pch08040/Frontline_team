@@ -1,0 +1,29 @@
+main {
+	display: flex;
+}
+aside{
+	width: 20%;
+	background-color: rgb(71, 71, 71);
+		
+	display: flex;
+	flex-direction: column;
+}
+section {
+	background-color: white;
+	width: 80%;
+		
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.admin_menu {
+	text-align: center;
+}
+.admin_menu a{
+	text-decoration: none;
+	color: white;
+}
+.admin_menu h1{
+	color: #FFD400;
+}

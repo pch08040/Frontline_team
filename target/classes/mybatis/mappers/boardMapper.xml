@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<resultMap id="boardMap" type="com.spring.frontline.dto.BoardDTO">
+	  <result column="board_seq" property="boardSeq"/>
+	  <result column="user_seq" property="userSeq"/>
+	  <result column="region_seq" property="regionSeq"/>
+	  <result column="type_seq" property="typeSeq"/>
+	  <result column="board_title" property="boardTitle"/>
+	  <result column="board_address" property="boardAddress"/>
+	  <result column="board_open" property="boardOpen"/>
+	  <result column="board_detail" property="boardDetail"/>
+	  <result column="board_regdate" property="boardRegDate"/>
+	  <result column="board_break" property="boardBreak"/>
+	  <result column="board_phone" property="boardPhone"/>
+	  <result column="board_image" property="boardImage"/>
+	</resultMap>
+	
+	<!-- 좋아요 순서대로 출력가능 -->
+	<select id="selectBoardList" parameterType="java.util.HashMap" resultMap="boardMap">
+		select * from (select rownum r, b.* from (select * from board_info where region_seq = #{regionSeq} and type_seq = #{typeSeq} order by board_seq) b) where r <![CDATA[>=]]> 1 and r <![CDATA[<=]]> 5
+	</select>
+	
+	<select id="selectBoardPage" parameterType="java.util.HashMap" resultMap="boardMap">
+	select *
+	from(
+		select rownum as rnum, tmp.*
+		from(
+			select board_info.*
+			from board_info
+			where region_seq = #{regionSeq} and type_seq = #{typeSeq}
+			order by board_seq
+		) tmp
+	)
+	where rnum <![CDATA[>=]]> #{startNum} and rnum <![CDATA[<=]]> #{endNum}
+	</select>
+	
+	
+	
+	<select id="selectBoardTotal" parameterType="java.util.HashMap" resultType="int">
+		select count(*)
+		from board_info
+		where region_seq = #{regionSeq} and type_seq = #{typeSeq}
+	</select>
+	
+	<select id="selectRegionNames" resultType="java.lang.String">
+		select region_name from board_region order by region_seq
+	</select>
+	
+	<select id="selectBoard" parameterType="com.spring.frontline.dto.BoardDTO" resultMap="boardMap"> 
+		select * from board_info where board_seq = #{boardSeq}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.spring.frontline.dto.BoardDTO">
+		insert into board_info values ( board_seq.nextval, #{userSeq}, #{regionSeq}, #{typeSeq}, #{boardTitle}, #{boardAddress}, #{boardOpen}, #{boardDetail}, TO_CHAR(SYSDATE + (interval '9' hour),'YYYY-MM-DD HH24:MI:SS'), #{boardBreak}, #{boardPhone}, #{boardImage})
+	</insert>
+	
+	<select id="adminBoardPage" parameterType="java.util.HashMap" resultMap="boardMap">
+		select * from (select rownum r, b.* from (select * from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq} order by board_seq) b) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+	</select>
+	
+	<select id="adminBoardSearchPage" parameterType="java.util.HashMap" resultMap="boardMap">
+		<if test="searchColumn == 'boardTitle'">
+			select * from (select rownum r, b.* from (select * from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq} and board_title like '%' || #{searchText} || '%' order by board_seq) b) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+		</if>
+		<if test="searchColumn == 'boardAddress'">
+			select * from (select rownum r, b.* from (select * from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq} and board_address like '%' || #{searchText} || '%' order by board_seq) b) where r <![CDATA[>=]]> #{startNum} and r <![CDATA[<=]]> #{endNum} order by r
+		</if>
+	</select>
+	
+	<select id="boardTotal" parameterType="java.util.HashMap" resultType="int">
+		select count(board_seq) from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq}
+	</select>
+	
+	<select id="boardSearchTotal" parameterType="java.util.HashMap" resultType="int">
+		<if test="searchColumn == 'boardTitle'">
+			select count(board_seq) from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq} and board_title like '%' || #{searchText} || '%'
+		</if>
+		<if test="searchColumn == 'boardAddress'">
+			select count(board_seq) from board_info where type_seq = #{typeSeq} and region_seq = #{regionSeq} and board_address like '%' || #{searchText} || '%'
+		</if>
+	</select>
+	
+	<delete id="deleteBoard" parameterType="java.util.List">
+		delete from board_info where board_seq in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="updateBoard" parameterType="com.spring.frontline.dto.BoardDTO">
+		update board_info set region_seq = #{regionSeq}, type_seq = #{typeSeq}, board_title = #{boardTitle},
+		  	   board_address = #{boardAddress}, board_open = #{boardOpen}, board_detail = #{boardDetail},
+		       board_break = #{boardBreak}, board_Phone = #{boardPhone}, board_image = #{boardImage} where board_seq = #{boardSeq}
+	</update>
+	
+	<select id="selectEatBoard" resultMap="boardMap"> <!-- 무조건 쓸것 -->
+   	select * from board_info where type_seq = 2
+	</select>
+	
+	<delete id="deleteDetailBoard" parameterType="list">
+		delete from board_info where board_seq in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="selectDetailBoard"  resultMap="boardMap"> 
+   	select * from board_info where board_seq = #{boardSeq}
+	</select>
+	
+	<update id="updateDetailBoard" parameterType="com.spring.frontline.dto.BoardDTO">
+		update
+		board_info
+		set
+		user_seq = #{userSeq},
+		region_seq = #{regionSeq},
+		board_Title = #{boardTitle},
+		board_Address = #{boardAddress},
+		board_Open = #{boardOpen},
+		board_Phone = #{boardPhone},
+		board_Detail = #{boardDetail},
+		board_RegDate = #{boardRegDate},
+		board_image = #{boardImage}
+		where
+		board_seq = #{boardSeq}
+		</update>
+		
+		<!-- 최현아 -->
+		
+		<insert id="travelNew" parameterType="com.spring.frontline.dto.BoardDTO">
+		insert into board_info values (
+			board_seq.nextval, #{userSeq}, #{regionSeq}, #{typeSeq}, 
+			#{boardTitle}, #{boardAddress}, #{boardOpen},
+			#{boardDetail}, TO_CHAR(SYSDATE + (interval '9' hour),'YYYY-MM-DD HH24:MI:SS'),
+			#{boardBreak}, #{boardPhone}, #{boardImage}
+		)
+	</insert>
+	
+	<select id="travelList" resultMap="boardMap">
+		select * from board_info where type_seq = 0
+	</select>
+	
+	<select id="travelUpdate" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select * from board_info where board_seq = #{boardSeq}
+	</select>
+	
+	<update id="setBoard" parameterType="com.spring.frontline.dto.BoardDTO">
+		update 
+			board_info 
+		set 
+			board_title = #{boardTitle}, 
+			board_address = #{boardAddress}, 
+			board_open = #{boardOpen},
+			board_detail = #{boardDetail}, 
+			board_break = #{boardBreak}, 
+			board_phone = #{boardPhone},
+			board_image = #{boardImage}
+		where 
+			board_seq = #{boardSeq}
+	</update>
+	
+	<delete id="travelDelete" parameterType="hashmap">
+		delete 
+			from board_info
+		where board_seq in
+		<foreach item="item" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="boardPick1" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select 
+			* 
+		from
+			board_info
+		where
+			board_seq = #{boardSearch}
+		and 
+			type_seq = #{typeSeq}
+	</select>
+	<select id="boardPick2" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select 
+			* 
+		from
+			board_info, board_region
+		where
+			board_info.region_seq = board_region.region_seq
+		and
+			board_region.region_name = #{boardSearch}
+		and 
+			type_seq = #{typeSeq}
+	</select>
+	<select id="boardPick3" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select
+			*
+		from
+			board_info
+		where
+			board_title = #{boardSearch}
+		and 
+			type_seq = #{typeSeq}
+	</select>
+	<select id="boardPick4" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select
+			*
+		from
+			board_info, user_info
+		where
+			board_info.user_seq = user_info.user_seq
+		and
+			user_info.user_seq = #{boardSearch}
+		and 
+			type_seq = #{typeSeq}
+	</select>
+	
+	<select id="pageBoard" parameterType="com.spring.frontline.dto.BoardDTO" resultMap="boardMap">
+	select * from (
+		select rownum as rnum, tmp.* from (
+			select * from board_info where type_Seq = 3 order by board_regdate desc
+		) tmp
+	) where rnum <![CDATA[ >= ]]> #{startNum} and rnum <![CDATA[ <= ]]> #{endNum}
+	</select>
+	
+	<select id="pageTotal" resultType="int">
+		select count(*) from board_info where type_Seq = 3
+	</select>
+	
+	<select id="updatePage" resultMap="boardMap" parameterType="com.spring.frontline.dto.BoardDTO">
+		select * from board_info where board_seq = #{boardSeq}
+	
+	</select>
+	
+	<delete id="deleteRoomBoard" parameterType="hashMap">
+	delete from board_info where board_seq = #{boardSeq}
+	</delete>
+</mapper>

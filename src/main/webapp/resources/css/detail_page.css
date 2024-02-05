@@ -1,0 +1,535 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+/* 길찾기 css */
+
+.findWay {
+    background: #3D4C53;
+    margin: 20px auto;
+    width: 200px;
+    height: 50px;
+    overflow: hidden;
+    text-align: center;
+    transition: .2s;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
+}
+
+.btnTwo {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin-top: -100px;
+    padding-top: 2px;
+    background: #5498FF;
+    left: -250px;
+    transition: .3s;
+}
+
+.btnText {
+    color: white;
+    transition: .3s;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+}
+
+.btnText2 {
+    margin-top: 60px;
+    margin-right: -130px;
+    color: #FFF;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+}
+
+.findWay:hover .btnTwo {
+    /*When hovering over .button change .btnTwo*/
+    left: -130px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+}
+
+.findWay:hover .btnText {
+    /*When hovering over .button change .btnText*/
+    margin-left: 65px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+}
+
+.findWay:active {
+    /*Clicked and held*/
+    box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+/* /////////////남주님 css///////////// */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.div1 {
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: column;
+    align-items: center;
+    /* margin: 15px; */
+    padding: 15px;
+}
+
+.area {
+    display: flex;
+    flex-direction: row;
+}
+
+.photo {
+    box-sizing: border-box;
+    background-color: sandybrown;
+    background-image: none;
+    width: 1820px;
+    height: 550px;
+    border-radius: 25px;
+}
+
+.div2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+}
+
+.map {
+    box-sizing: border-box;
+    background-color: darkblue;
+    width: 1820px;
+    height: 620px;
+    border-radius: 25px;
+}
+
+.div3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+}
+
+.div4 {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 25px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.li2 {
+    margin-left: 500px;
+    /* margin-right: 500px; */
+}
+
+.li1 {
+    margin-right: 500px;
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.div5 {
+    display: flex;
+    justify-content: space-between
+}
+
+.place {
+    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 40px;
+}
+
+.title {
+    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 35px;
+    color: #474747;
+    text-align: center;
+}
+
+.text {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 20px;
+    line-height: 35px;
+    padding: 5%;
+}
+
+.area2 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 30px;
+    color: #474747;
+}
+
+.review {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 35px;
+    color: #474747;
+}
+
+.user_number {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 17px;
+}
+
+.div7 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 20px;
+}
+
+.div6 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 17px;
+    margin: 20px;
+
+}
+
+.bt {
+    margin-right: 30px;
+}
+
+.ul {
+    list-style: none;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+li4 {
+    display: list-item;
+    float: left;
+    margin-left: 8%;
+    margin-bottom: 3%;
+}
+
+
+
+
+/* /////////////민상 css///////////// */
+
+
+.wrap {
+    max-width: 1280px;
+
+    /* align-items: center; */
+
+    margin: auto;
+}
+
+
+p1 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.best_food,
+.best_play {
+    /* border: 1px solid black; */
+    width: 1240px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* text-align: center; */
+    overflow: hidden;
+    /* margin-left: 14%; */
+
+
+}
+
+.food,
+.play {
+    flex-shrink: 0;
+    /* margin: 10px; */
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    /* width: 1240px; */
+    height: 500px;
+    cursor: pointer;
+    /* text-align: center; */
+
+}
+
+.food_item,
+.play_item {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* flex-shrink: 0; */
+    /* margin-left: 95px; */
+    /* overflow: hidden; */
+
+    /* display: flex; */
+    /* justify-content: center; */
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.food_item img,
+.play_item img {
+    /* position: absolute; */
+    width: 1240px;
+    border-radius: 20px;
+    /* margin-left: 6%; */
+    /* border: 1px solid black; */
+    height: 500px;
+    /* background-color: rgb(132, 0, 255); */
+    object-fit: cover;
+    /* flex-shrink: 0; */
+}
+
+#map {
+    /* position: absolute; */
+    width: 1100px;
+    border-radius: 20px;
+    /* margin-left: 6%; */
+    /* border: 1px solid black; */
+    height: 400px;
+    /* background-color: rgb(132, 0, 255); */
+    /* object-fit: cover; */
+    /* flex-shrink: 0; */
+    border: 1px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 20px;
+    flex-wrap: wrap;
+
+}
+
+
+.div5 {
+    margin-top: 5%;
+}
+
+.review {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 35px;
+    color: #474747;
+}
+
+.user_number {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 17px;
+}
+
+.div7 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 20px;
+}
+
+.div6 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 17px;
+    margin: 20px;
+
+}
+
+
+.bundle {
+    display: flex;
+    justify-content: space-between
+}
+
+.bt {
+    margin-right: 30px;
+}
+
+.reply,
+.delete {
+    margin-left: 2%;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    background-color: #5498FF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*추가*/
+.bundle {
+    display: flex;
+    justify-content: space-between
+}
+
+#x1 {
+    border: none;
+    cursor: pointer;
+    background-color: white;
+}
+
+.reply {
+    background-color: #F0F0F0;
+}
+
+.fold_bt {
+    padding: 5px;
+    margin-top: 20px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    text-align: center;
+    font-size: 15px;
+    color: #999999;
+    font-family: 'Nanum Gothic', sans-serif;
+    cursor: pointer;
+}
+
+.reply {
+    display: flex;
+    flex-direction: column
+}
+
+.replytext {
+    justify-content: center;
+}
+
+.replysbs {
+    display: flex;
+    flex-direction: row
+}
+
+/*추가*/
+
+/*여기서 답글 더 추가*/
+
+.plusbundle {
+
+    display: flex;
+    justify-content: space-between;
+}
+#x2 {
+    border: none;
+    cursor: pointer;
+    background-color: #F0F0F0;
+}
+
+/* 댓글관련 수정 */
+.line {
+	border-top: 1px solid black;
+	
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+.image_user, .image_admin, .image_comment, .image_comment_direction {
+	height: 50px;
+	width: 50px;
+}
+.comments_section {
+	height: auto;
+}
+
+.comment_write, .coComment_write{
+	display: flex;
+	
+	height: 20%;
+}
+
+.comment_write_form, .coComment_write_form {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+	width: 100%;
+	height: 100%;
+}
+
+.comment_write_text, .coComment_write_text {
+	resize: none;
+	width: 80%;
+	height: 50px;
+	
+	border-radius: 10px;
+}
+
+.comment_write_submit, .comment_view_button, .coComment_write_submit{
+	width: 100px;
+	height: 50px;
+	
+	border-radius: 10px;
+	border: 1px solid grey;
+	
+	cursor: pointer;
+}
+
+.comment_view{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.comment_view_main, .coComment_view_main{
+	width: 80%;
+}
+
+.coComment_write {
+	display: none;
+}
+
+.coComment_write_target {
+	display: none;
+}
+
+.coComment_view {
+	display: flex;
+	align-items: center;
+	
+	padding-left: 3%;
+}
+.coComment_view div {
+	margin-right: 3%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+
+#wrap{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ===== 리셋 구간 ===== */
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+  
+/*     개발용 설정
+    min-height: 100vh; */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: normal;
+    margin: 0;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  strong, em {
+    font-weight: inherit;
+    font-style: normal;
+  }
+  
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  dl { margin: 0; }
+  dd {
+    margin: 0;
+    display: inline;
+  }
+  
+  figure { margin: 0; }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  th { font-weight: normal; }
+  
+  address { font-style: inherit; }
+  

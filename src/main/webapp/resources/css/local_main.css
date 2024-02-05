@@ -1,0 +1,485 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+    /* font-weight: bold; */
+}
+
+#cs {
+    margin: auto;
+}
+
+p4 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+p5,
+p6 {
+    font-size: 20px;
+}
+
+p6 {
+    color: #5498FF;
+}
+
+.best_travel {
+    text-align: center;
+}
+
+.weathers {
+    display: inline-flex;
+    align-items: center;
+}
+
+.wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    /* align-items: center; */
+
+    /* margin-left: 4px; */
+}
+
+.title {
+    text-align: center;
+    /* border: 1px solid black; */
+}
+
+.items {
+    /* border: 1px solid black; */
+
+    /* display: flex; */
+    /* justify-content: center; */
+    width: 1240px;
+    overflow: hidden;
+    display: flex;
+    /* justify-content: space-evenly; */
+    /* justify-content: center; */
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+
+.itemss {
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    display: flex;
+    width: 415px;
+    /* overflow: hidden; */
+    /* justify-content: center; */
+
+}
+
+.item {
+
+    flex-shrink: 0;
+    margin: 10px;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    width: 393px;
+    height: 200px;
+    /* overflow: hidden; */
+    cursor: pointer;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.btns #btn1 {
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: -5px;
+    background-image: url("https://github.com/Jominsang1/FrontLine_Project/blob/main/images/arrow_left.png?raw=true");
+    background-size: cover;
+
+}
+
+.btns #btn2 {
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-left: -5px;
+    background-image: url("https://github.com/Jominsang1/FrontLine_Project/blob/main/images/arrow_right.png?raw=true");
+    background-size: cover;
+
+}
+
+#count {
+    width: 100px;
+    height: 20px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+#weather {
+    margin: 5px;
+    text-align: center;
+    /*border: 1px solid black;*/
+}
+
+.best_food,
+.best_play,
+.chungnam_city {
+    display: flex;
+    /* justify-content: space-evenly; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.best_food .food,
+.best_play .play {
+    margin: 20px;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    cursor: pointer;
+    /* text-align: center; */
+
+}
+
+p1 {
+    font-size: 15px;
+}
+
+.food img,
+.play img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+
+/* .chungnam_city .location {
+    margin: 20px;
+    border-radius: 50%;
+    width: 50%;
+    height: 150px;
+    border: 3px solid rgba(0, 102, 255, 0.281);
+    border-style: dashed;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 20px;
+} */
+
+.chungnam_city .btn:hover,
+.best_food .food:hover,
+.best_play .play:hover {
+
+    transform: scale(1.1);
+}
+
+.location img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.second_line {
+    margin-left: 20px;
+}
+
+.best_sleep {
+    /* border: 1px solid black; */
+    width: 1240px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* text-align: center; */
+    overflow: hidden;
+    /* margin-left: 14%; */
+
+}
+
+#sleep_img {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* flex-shrink: 0; */
+    /* margin-left: 95px; */
+    /* overflow: hidden; */
+}
+
+#sleep_img img {
+    /* position: absolute; */
+    width: 1240px;
+    border-radius: 20px;
+    /* margin-left: 6%; */
+    /* border: 1px solid black; */
+    height: 400px;
+    /* background-color: rgb(132, 0, 255); */
+    object-fit: fill;
+    /* flex-shrink: 0; */
+
+}
+
+.sleep {
+    flex-shrink: 0;
+    /* margin: 10px; */
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    width: 1240px;
+    height: 400px;
+    cursor: pointer;
+    /* text-align: center; */
+}
+
+#sleep_more {
+    border-radius: 20px;
+    position: absolute;
+    /* border: 1px solid black; */
+    width: 35%;
+    height: 300px;
+    margin-top: 5%;
+    background-color: rgb(0, 0, 0, 0.7);
+
+}
+
+#logoimg {
+    width: 10%;
+    margin: 4%;
+    margin-left: 40%;
+    margin-top: 12%;
+    display: inline-block;
+}
+
+#logoimg img {
+    width: 85px;
+}
+
+p3 {
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+}
+
+#moreinn {
+    text-align: center;
+    /* font-family: Noto Sans KR; */
+}
+
+.sleep_more_btn {
+    width: 35%;
+    height: 5%;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white 1.0;
+}
+
+.sleep_more_btn:hover {
+    transform: scale(1.1);
+}
+
+.chungnam_city {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.item_more {
+    text-decoration-line: none;
+    float: right;
+    margin-right: 3.5%;
+    cursor: pointer;
+    color: black;
+}
+
+.select_place {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.select_place_text {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.select_place_list {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    margin-top: 30px;
+
+}
+
+.select_place_list img {
+    cursor: pointer;
+    width: 180px;
+
+
+}
+
+.select_place_list img:hover {
+    transform: scale(1.2);
+}
+
+
+/* footer */
+
+/* @import url("/css/reset.css"); */
+
+
+footer {
+    margin-top: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-weight: 400; */
+    color: #FFFFFF;
+    font-size: 25px;
+    line-height: 34.05px;
+
+}
+
+.footer_div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* border: solid 1px red; */
+}
+
+
+footer {
+    position: relative;
+    top: 100%;
+
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 230px;
+    background-color: #474747;
+}
+
+.textdiv {
+    display: inline-block;
+    padding-top: 30px;
+    /* padding-left: 30px; */
+    margin-left: 40px;
+}
+
+.icondiv {
+    /* display: flex;
+justify-content: flex-end;
+display: inline-block; */
+    padding-top: 30px;
+    margin-right: 40px;
+}
+
+
+
+.number {
+    font-size: 35px;
+    /* font-weight: 600; */
+    text-align: right;
+    /* margin-right: 34px; */
+    margin-right: 25px;
+    /* margin-bottom:30px; */
+    margin-top: -35px;
+}
+
+.rightText {
+    text-align: right;
+    /* font-weight: 600; */
+    /* margin-right: 34px; */
+    /* vertical-align: top; */
+    margin-right: 25px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+}
+
+.footer_top {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    /* border-bottom: 1px solid white; */
+
+}
+
+.footer_bottom {
+    /* height: 500px; */
+    /* border: 1px solid red; */
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.logo_footer {
+    margin-left: 40px;
+    margin-top: -15px;
+}
+
+.footer {
+    height: 10px;
+    /* background-color: red; */
+    /*내용 높이입니다 */
+}
+
+.threeline {
+    position: relative;
+    margin: 35px 50px 35px 10px;
+}
+
+.threeline img {
+    cursor: pointer;
+    width: 50px;
+    height: 35px;
+}
+.weather_wrap {
+	display: flex;
+	align-items: center;
+}
+a {
+    text-decoration-line: none;
+    color: black;
+}
+footer a {
+    color: #fff; text-decoration: none; outline: none
+}
